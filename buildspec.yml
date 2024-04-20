@@ -1,0 +1,16 @@
+version: 0.2
+
+env:
+  parameter-store:
+    DOCKER_REGISTRY_USERNAME: /reactapp/docker-cred/username
+    DOCKER_REGISTRY_PASSWORD: /reactapp/docker-cred/password
+    DOCKER_REGISTRY_URL: /reactapp/docker-registry/url
+phases:
+  build:
+    commands:
+      - echo "Building Docker image..."
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
+      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/reactapp:latest" .
+      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/reactapp:latest"
+      - echo "Build completed successfully!"
+

@@ -1,0 +1,17 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "bucket": "my-ebs-bucket",
+    "key": "config.json"
+  },
+  "Image": {
+    "Name": "makproject/reactapp",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "80",
+      "HostPort": "80"
+    }
+  ]
+}      
